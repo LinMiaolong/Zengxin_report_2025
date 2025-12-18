@@ -1327,7 +1327,7 @@
                 
                 <!-- 搜索框 -->
                 <div class="search-box">
-                    <input type="text" id="search-input" placeholder="输入剧目、城市、角色或搭档进行搜索...">
+                    <input type="text" id="search-input" placeholder="输入剧目、城市、搭档进行搜索...">
                     <button id="search-btn">
                         <i class="fa-solid fa-magnifying-glass"></i> 搜索
                     </button>
@@ -1345,7 +1345,6 @@
                             <th>时间</th>
                             <th>城市</th>
                             <th>剧目</th>
-                            <th>角色</th>
                             <th>搭档</th>
                         </tr>
                     </thead>
@@ -1595,7 +1594,10 @@
     <h2 class="section-title"><i class="fa-solid fa-handshake"></i> 年度合作演员</h2>
 <div class="partner-grid">
   <p style="color:#aaa; margin-top:-15px; margin-bottom:25px; font-size:17px;">
-    2025年合作次数最多的好同事们  “兄弟抱一下”
+    2025年合作次数最多的好同事们
+  </p>
+  <p style="color:#aaa; margin-top:-15px; margin-bottom:25px; font-size:17px;">
+    “兄弟抱一下”
   </p>
         <!-- 每个 partner-card 都添加了 data-photo 属性用于弹窗图片 -->
         <div class="partner-card" data-actor="dumu" data-photo=https://cdn.jsdelivr.net/gh/LinMiaolong/Zengxin_photos@main/dumu.jpg
@@ -1667,7 +1669,10 @@
     <i class="fa-solid fa-user-group"></i> 年度合作搭档
   </h2>
   <p style="color:#aaa; margin-top:-15px; margin-bottom:25px; font-size:17px;">
-    2025年合作次数最多的搭档组合  “一台好戏/联创/涵金我要看这个！”
+    2025年合作次数最多的搭档组合
+  </p>
+  <p style="color:#aaa; margin-top:-15px; margin-bottom:25px; font-size:17px;">
+    “一台好戏/联创/涵金我要看这个！”
   </p>
 
   <div class="combination-grid">
@@ -2014,7 +2019,6 @@
                 <td>${performance.time}</td>
                 <td>${performance.city}</td>
                 <td>${performance.play}</td>
-                <td>${performance.role}</td>
                 <td>${performance.partner || '-'}</td>
             `;
             tbody.appendChild(row);
