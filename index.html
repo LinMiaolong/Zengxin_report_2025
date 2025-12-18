@@ -41,10 +41,8 @@
 
         /* ====== 标题区域 ====== */
         .header {
-            background: linear-gradient(135deg, 
-                rgba(255, 87, 104, 0.95) 0%, 
-                rgba(255, 138, 0, 0.95) 50%, 
-                rgba(155, 81, 224, 0.95) 100%);
+    background: url('https://cdn.jsdelivr.net/gh/LinMiaolong/Zengxin_photos@main/title.jpg')
+                center/cover no-repeat;
             color: white;
             padding: 70px 40px 50px;
             text-align: center;
@@ -52,6 +50,15 @@
             border-radius: 28px 28px 0 0;
             overflow: hidden;
         }
+/* 15% 黑色蒙版，叠在图上方、文字下方 */
+.header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 1;
+}
+
 
         .header::after {
             content: '';
@@ -1458,6 +1465,16 @@
             <p style="color: #aaa; margin-top: -15px; margin-bottom: 25px; font-size: 17px;">
                 每一次连线，都是一次为热爱的奔赴
             </p>
+<p margin-top: -10px; margin-bottom: 25px; font-size: 18px;">
+<span style="color:#ff8a00;">广州 ↔ 武汉：8次</span>&nbsp;&nbsp;&nbsp;
+<span style="color:#ff5768;">广州 ↔ 长沙：8次</span>&nbsp;&nbsp;&nbsp;
+<span style="color:#9b51e0;">武汉 ↔ 长沙：4次</span>&nbsp;&nbsp;&nbsp;
+<span style="color:#4169e1;">武汉 ↔ 上海：2次</span>&nbsp;&nbsp;&nbsp;
+<span style="color:#00c896;">长沙 ↔ 上海：2次</span>
+            </p>
+
+</span>   
+
             <div class="city-map-container">
                 <div class="map-bg"></div>
                 <div class="city-lines-container" id="cityLinesContainer"></div>
@@ -1483,29 +1500,7 @@
         <div class="city-name">上海</div>
     </div>
 </div>
-                <div class="map-note">
-                    <i class="fa-solid fa-info-circle"></i>
-                    <strong>跨城连打统计：</strong><br>
-                    <div class="route-item" style="color: #ff8a00;">
-        广州 ↔ 武汉：<span class="route-count" style="color: #ffc107;">8次</span>
-    </div>
-    
-    <div class="route-item" style="color: #ff5768;">
-        广州 ↔ 长沙：<span class="route-count" style="color: #ffc107;">8次</span>
-    </div>
-    
-    <div class="route-item" style="color: #9b51e0;">
-        武汉 ↔ 长沙：<span class="route-count" style="color: #ffc107;">4次</span>
-    </div>
-    
-    <div class="route-item" style="color: #4169e1;">
-        武汉 ↔ 上海：<span class="route-count" style="color: #ffc107;">2次</span>
-    </div>
-    
-    <div class="route-item" style="color: #00c896;">
-        长沙 ↔ 上海：<span class="route-count" style="color: #ffc107;">2次</span>
-    </div>
-                </div>
+                
             </div>
         </div>
 
