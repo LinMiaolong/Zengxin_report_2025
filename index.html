@@ -1268,6 +1268,15 @@
 .no-icon::before {
   display: none !important;            /* 强制去掉 » 图标 */
 }
+
+/* 弹窗内容区域超出就滚 */
+.schedule-modal-content,
+.modal-content {
+    max-height: 90vh;          /* 最大高＝视口90% */
+    overflow-y: auto;          /* 纵向滚动条 */
+    -webkit-overflow-scrolling: touch; /* iOS 顺滑 */
+}
+
     </style>
 </head>
 <body>
@@ -2748,6 +2757,8 @@ function initCombinationModal(){
   document.getElementById('schedule-close-btn').onclick = close;
   modal.addEventListener('click', e => { if (e.target === modal) close(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) close(); });
+modal.scrollTop = 0; 
+
 }
 initCombinationModal();
 
