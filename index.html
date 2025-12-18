@@ -2853,20 +2853,40 @@ initCombinationModal();
 
     // 画前5横向条形图
     let roleChart;
-    function showTop5(){
-      const sorted=Object.entries(votes).sort((a,b)=>b[1]-a[1]).slice(0,5);
-      const labels=sorted.map(x=>x[0]);
-      const data  =sorted.map(x=>x[1]);
-      const ctx=document.getElementById('roleChart')?.getContext('2d');
-      if(!ctx)return;
-      wrap.style.display='block';
-      if(roleChart)roleChart.destroy();
-      roleChart=new Chart(ctx,{
-        type:'bar',
-        data:{labels,datasets:[{label:'票数',data,backgroundColor:'rgba(255,138,0,0.8)',borderColor:'#ff8a00',borderWidth:2,borderRadius:6}]},
-        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{color:'#aaa'}},y:{ticks:{color:'#ddd'}}}}
-      });
+function showTop5(){
+  const sorted=Object.entries(votes).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const labels=sorted.map(x=>x[0]);
+  const data  =sorted.map(x=>x[1]);
+  const ctx=document.getElementById('roleChart')?.getContext('2d');
+  if(!ctx)return;
+
+  wrap.style.display='block';
+  // ① 容器只留最小呼吸感
+  wrap.style.padding='8px 0 4px 0';
+
+  if(roleChart)roleChart.destroy();
+  roleChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels,datasets:[{label:'票数',data,backgroundColor:'rgba(255,138,0,0.8)',borderColor:'#ff8a00',borderWidth:2,borderRadius:6}]},
+    options:{
+      indexAxis:'y',
+      responsive:false,   // 关闭自动撑高
+      maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,ticks:{color:'#aaa'}},y:{ticks:{color:'#ddd',font:{size:12}}}},
+      height:140,         // 画布固定 140 px（5 条刚好）
+      layout:{padding:{left:0,right:0,top:0,bottom:4}}
     }
+  });
+
+  // ② 一句话行高 20 px，上下各 2 px 留白
+  const quote=document.createElement('p');
+  quote.style.cssText='text-align:center;margin:2px 0 2px;color:#aaa;font-size:14px;letter-spacing:1px;line-height:20px;';
+  quote.textContent='投票仅供娱乐，每场演出都是一步步前行的见证。';
+  const old=wrap.querySelector('p');
+  if(old)old.remove();
+  wrap.appendChild(quote);
+}
     if(voted){tip.textContent='以下是当前票数前 5 的角色：';showTop5();}
   }
   tryInit();
