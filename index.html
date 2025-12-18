@@ -968,9 +968,9 @@
                 rgba(40, 42, 75, 0.98) 0%, 
                 rgba(30, 32, 58, 0.98) 100%);
             border-radius: 28px;
-            padding: 20px;
-            max-width: 96vw;
-            max-height: 90vw;
+            padding: 40px;
+            max-width: 90vw;
+            max-height: 95vw;
             width: auto;
             height: auto;
             text-align: center;
@@ -1003,43 +1003,38 @@
 
 .modal-content img {
     display: block;
-    max-width: 90%;          /* 横图→宽屏 */
-    max-height: 60vh;         /* 竖图→高屏 */
+    max-width: 85vw;          /* 横图→宽屏 */
+    max-height: 75vh;         /* 竖图→高屏 */
     width: auto;
     height: auto;
     object-fit: contain;
-    margin: 0 auto 15px;           /* 水平居中 */
-    border-radius: 12px;
+    margin: 0 auto;           /* 水平居中 */
+    border-radius: 18px;
 }
         .modal-content h3 {
             color: #ff8a00;
-            margin-bottom: 10px;
-            font-size: 4vw;
+            margin-bottom: 15px;
+            font-size: 28px;
             font-weight: 700;
-line-height: 1.3;
-  word-break: break-all;
-
         }
 
         .modal-content p {
             color: #ddd;
-            margin-bottom: 20px;
-            font-size: 3.5vw;
-            word-break: break-all;
-line-height: 1.4;
+            margin-bottom: 30px;
+            font-size: 18px;
+            line-height: 1.6;
         }
 
         .modal-close {
-            padding: 12px 0;
+            padding: 15px 35px;
             background: linear-gradient(135deg, #ff5768, #ff8a00);
             color: white;
             border: none;
             border-radius: 14px;
             cursor: pointer;
-            font-size: 4vw;
+            font-size: 17px;
             font-weight: 600;
             transition: all 0.3s ease;
-width:90%
         }
 
         .modal-close:hover {
@@ -1273,7 +1268,6 @@ width:90%
 .no-icon::before {
   display: none !important;            /* 强制去掉 » 图标 */
 }
-
     </style>
 </head>
 <body>
@@ -1351,6 +1345,7 @@ width:90%
                             <th>时间</th>
                             <th>城市</th>
                             <th>剧目</th>
+                            <th>角色</th>
                             <th>搭档</th>
                         </tr>
                     </thead>
@@ -2019,6 +2014,7 @@ width:90%
                 <td>${performance.time}</td>
                 <td>${performance.city}</td>
                 <td>${performance.play}</td>
+                <td>${performance.role}</td>
                 <td>${performance.partner || '-'}</td>
             `;
             tbody.appendChild(row);
