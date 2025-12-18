@@ -1761,21 +1761,6 @@
   </div>
 </div>
 
-        <!-- ====== 年度喜爱角色投票 ====== -->
-        <div class="role-poll-section" style="background:rgba(30,31,56,.6);padding:50px 40px">
-          <h2 class="section-title"><i class="fa-solid fa-trophy"></i> 年度喜爱角色投票</h2>
-          <p id="role-tip" style="color:#aaa;margin-top:-15px;font-size:17px">请选择 1-3 个你今年最喜欢的角色</p>
-
-          <div id="role-form" style="margin:30px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:15px"></div>
-
-          <button id="role-submit" class="modal-close" style="margin-top:25px">提交投票</button>
-
-          <div id="role-chart-wrap" class="chart-wrap" style="height:320px;margin-top:40px;display:none">
-            <canvas id="roleChart"></canvas>
-          </div>
-        </div>
-        <!-- 角色投票结束 -->
-
         <!-- 年度总结区 -->
         <div class="summary-section">
             <h2 class="section-title"><i class="fa-solid fa-award"></i> 年度总结</h2>
@@ -2809,88 +2794,6 @@ initCombinationModal();
   </div>
 </div>
 
-<!-- 角色投票逻辑（页面最底部，放 </body> 之前） -->
-<script>
-(function initRolePollSafely(){
-  function tryInit(){
-    const formBox = document.getElementById('role-form');
-    if (!formBox || !window.allPerformances || !window.allPerformances.length){
-      setTimeout(tryInit, 100);
-      return;
-    }
-    const roles = [...new Set(window.allPerformances.map(d=>d.role))].sort();
-    const store = 'zengxin_role_poll_2025';
-    const votedKey = 'zengxin_role_poll_voted';
-    let votes = JSON.parse(localStorage.getItem(store)) || Object.fromEntries(roles.map(r=>[r,0]));
-    const voted = localStorage.getItem(votedKey)==='true';
-
-    const form   = formBox;
-    const submit = document.getElementById('role-submit');
-    const tip    = document.getElementById('role-tip');
-    const wrap   = document.getElementById('role-chart-wrap');
-
-    // 生成复选框
-    roles.forEach(r=>{
-      const label=document.createElement('label');
-      label.style.color='#ddd';
-      label.innerHTML=`<input type="checkbox" value="${r}" ${voted?'disabled':''}> ${r}`;
-      form.appendChild(label);
-    });
-
-    // 提交
-    submit.addEventListener('click',()=>{
-      if(voted){alert('你已投过票！');return;}
-      const picked=[...form.querySelectorAll('input:checked')].map(i=>i.value);
-      if(picked.length<1||picked.length>3){alert('请选择 1-3 个角色！');return;}
-      picked.forEach(r=>votes[r]++);
-      localStorage.setItem(store,JSON.stringify(votes));
-      localStorage.setItem(votedKey,'true');
-      form.querySelectorAll('input').forEach(i=>i.disabled=true);
-      submit.disabled=true; submit.style.opacity='0.4';
-      tip.textContent='以下是当前票数前 5 的角色：';
-      showTop5();
-    });
-
-    // 画前5横向条形图
-    let roleChart;
-function showTop5(){
-  const sorted=Object.entries(votes).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  const labels=sorted.map(x=>x[0]);
-  const data  =sorted.map(x=>x[1]);
-  const ctx=document.getElementById('roleChart')?.getContext('2d');
-  if(!ctx)return;
-
-  wrap.style.display='block';
-  // ① 容器只留最小呼吸感
-  wrap.style.padding='8px 0 4px 0';
-
-  if(roleChart)roleChart.destroy();
-  roleChart=new Chart(ctx,{
-    type:'bar',
-    data:{labels,datasets:[{label:'票数',data,backgroundColor:'rgba(255,138,0,0.8)',borderColor:'#ff8a00',borderWidth:2,borderRadius:6}]},
-    options:{
-      indexAxis:'y',
-      responsive:false,   // 关闭自动撑高
-      maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{x:{beginAtZero:true,ticks:{color:'#aaa'}},y:{ticks:{color:'#ddd',font:{size:12}}}},
-      height:140,         // 画布固定 140 px（5 条刚好）
-      layout:{padding:{left:0,right:0,top:0,bottom:4}}
-    }
-  });
-
-  // ② 一句话行高 20 px，上下各 2 px 留白
-  const quote=document.createElement('p');
-  quote.style.cssText='text-align:center;margin:2px 0 2px;color:#aaa;font-size:14px;letter-spacing:1px;line-height:20px;';
-  quote.textContent='投票仅供娱乐，每场演出都是一步步前行的见证。';
-  const old=wrap.querySelector('p');
-  if(old)old.remove();
-  wrap.appendChild(quote);
-}
-    if(voted){tip.textContent='以下是当前票数前 5 的角色：';showTop5();}
-  }
-  tryInit();
-})();
 </script>
 </body>
 
